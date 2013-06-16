@@ -5,9 +5,9 @@
 ## Scenario settings
 Scenario.name = Goroba-Test
 Scenario.simulateConnections = true
-Scenario.updateInterval = 1.0
+Scenario.updateInterval = 0.1
 # 43200s == 12h
-Scenario.endTime = 5000
+Scenario.endTime = 3.6k
 Scenario.nrofHostGroups = 1
 
 
@@ -45,27 +45,23 @@ btInterface.transmitRange = 10
 # routeType: route's type - for MapRouteMovement
 
 # Common settings for all groups
-Group.movementModel = ClusterMovement
-Group.router = EpidemicRouter
+Group.movementModel = MapBasedMovement
+Group.router = MaxPropRouter
 Group.bufferSize = 5M
+Group.routeFile = ../blocoA.wkt
 # All nodes have the bluetooth interface
 Group.nrofInterfaces = 1
 Group.interface1 = btInterface
 # Walking speeds
-Group.speed = 0.5, 1.5
+Group.speed = 0.1,0.2
 # Message TTL of 300 minutes (5 hours)
-Group.msgTtl = 300
-Group.nrofHosts = 5
+Group.msgTtl = 1
+Group.nrofHosts = 10
 Group.groupID = n
+Group.nodeLocation=0,0
 
-
-## Movement model settings
-# seed for movement models' pseudo random number generator (default = 0)
-MovementModel.rngSeed = 1
-# World's size for Movement Models without implicit size (width, height; meters)
-MovementModel.worldSize = 10000, 10000
-# How long time to move hosts in the world before real simulation
-
+MapBasedMovement.nrofMapFiles = 1
+MapBasedMovement.mapFile1 = ../blocoA.wkt
 
 ## Message creation parameters
 # How many event generators
@@ -78,7 +74,7 @@ Events1.interval = 25,35
 # Message sizes (500kB - 1MB)
 Events1.size = 500k,1M
 # range of message source/destination addresses
-Events1.hosts = 0,4
+Events1.hosts = 0,10
 # Message ID prefix
 Events1.prefix = M
 
@@ -86,7 +82,7 @@ Events1.prefix = M
 ## Reports - all report names have to be valid report classes
 # how many reports to load
 Report.nrofReports = 1
-Report.reportDir = reports/Test-5-nodes
+Report.reportDir = reports/goroba-tests
 # Report classes to load
 Report.report1 = MessageStatsReport
 
