@@ -3,7 +3,7 @@
 #
 
 ## Scenario settings
-Scenario.name = Goroba-Test
+Scenario.name = blocoA-DirectDelivery
 Scenario.simulateConnections = true
 Scenario.updateInterval = 0.1
 # 43200s == 12h
@@ -22,7 +22,7 @@ Scenario.nrofHostGroups = 1
 btInterface.type = SimpleBroadcastInterface
 # Transmit speed of 2 Mbps = 250kBps
 btInterface.transmitSpeed = 250k
-btInterface.transmitRange = 10
+btInterface.transmitRange = 5
 
 
 ## Group-specific settings:
@@ -46,9 +46,9 @@ btInterface.transmitRange = 10
 
 # Common settings for all groups
 Group.movementModel = MapBasedMovement
-Group.router = MaxPropRouter
+Group.router = DirectDeliveryRouter
 Group.bufferSize = 5M
-Group.routeFile = ../blocoA.wkt
+Group.routeFile = ../simulacoes/wkts/blocoA.wkt
 # All nodes have the bluetooth interface
 Group.nrofInterfaces = 1
 Group.interface1 = btInterface
@@ -61,7 +61,7 @@ Group.groupID = n
 Group.nodeLocation=0,0
 
 MapBasedMovement.nrofMapFiles = 1
-MapBasedMovement.mapFile1 = ../blocoA.wkt
+MapBasedMovement.mapFile1 = ../simulacoes/wkts/blocoA.wkt
 
 ## Message creation parameters
 # How many event generators
@@ -82,7 +82,7 @@ Events1.prefix = M
 ## Reports - all report names have to be valid report classes
 # how many reports to load
 Report.nrofReports = 1
-Report.reportDir = reports/goroba-tests
+Report.reportDir = reports/blocoA
 # Report classes to load
 Report.report1 = MessageStatsReport
 
