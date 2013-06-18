@@ -3,7 +3,7 @@
 #
 
 ## Scenario settings
-Scenario.name = blocoA-Epidemic
+Scenario.name = usp-Epidemic
 Scenario.simulateConnections = true
 Scenario.updateInterval = 0.1
 # 43200s == 12h
@@ -18,11 +18,10 @@ Scenario.nrofHostGroups = 1
 # transmitSpeed : transmit speed of the interface (bytes per second)
 # transmitRange : range of the interface (meters)
 
-# "Bluetooth" interface for all nodes
-btInterface.type = SimpleBroadcastInterface
-# Transmit speed of 2 Mbps = 250kBps
-btInterface.transmitSpeed = 250k
-btInterface.transmitRange = 5
+# interface wifi
+wifiInterface.type = SimpleBroadcastInterface
+wifiInterface.transmitSpeed = 5000k
+wifiInterface.transmitRange = 80
 
 
 ## Group-specific settings:
@@ -48,21 +47,20 @@ btInterface.transmitRange = 5
 Group.movementModel = MapBasedMovement
 Group.router = EpidemicRouter
 Group.bufferSize = 5M
-Group.routeFile = ../simulacoes/wkts/blocoA.wkt
+Group.routeFile = ../simulacoes/wkts/usp.wkt
 # All nodes have the bluetooth interface
 Group.nrofInterfaces = 1
-Group.interface1 = btInterface
+Group.interface1 = wifiInterface
 # Walking speeds
-Group.speed = 0.1,0.2
+Group.speed = 30,50
 # Message TTL of 300 minutes (5 hours)
-Group.msgTtl = 1
-Group.nrofHosts = 10
+Group.msgTtl = 2
+Group.nrofHosts = 100
 Group.groupID = n
 Group.nodeLocation=0,0
 
 MapBasedMovement.nrofMapFiles = 1
-MapBasedMovement.mapFile1 = ../simulacoes/wkts/blocoA.wkt
-
+MapBasedMovement.mapFile1 = ../simulacoes/wkts/usp.wkt
 
 ## Message creation parameters
 # How many event generators
@@ -71,11 +69,10 @@ Events.nrof = 1
 Events1.class = MessageEventGenerator
 # (following settings are specific for the MessageEventGenerator class)
 # Creation interval in seconds (one new message every 25 to 35 seconds)
-Events1.interval = 25,35
-# Message sizes (500kB - 1MB)
-Events1.size = 500k,1M
+Events1.interval = 30,60
+Events1.size = 10k,50k
 # range of message source/destination addresses
-Events1.hosts = 0,10
+Events1.hosts = 0,100
 # Message ID prefix
 Events1.prefix = M
 
@@ -83,12 +80,6 @@ Events1.prefix = M
 ## Reports - all report names have to be valid report classes
 # how many reports to load
 Report.nrofReports = 1
-Report.reportDir = reports/blocoA
+Report.reportDir = reports/usp
 # Report classes to load
 Report.report1 = MessageStatsReport
-
-
-## Optimization settings -- these affect the speed of the simulation
-## see World class for details.
-Optimization.cellSizeMult = 5
-Optimization.randomizeUpdateOrder = true
