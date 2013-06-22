@@ -7,7 +7,7 @@ Scenario.name = blocoA-Prophet
 Scenario.simulateConnections = true
 Scenario.updateInterval = 0.1
 # 43200s == 12h
-Scenario.endTime = 3.6k
+Scenario.endTime = 86400
 Scenario.nrofHostGroups = 1
 
 
@@ -55,8 +55,8 @@ Group.interface1 = btInterface
 # Walking speeds
 Group.speed = 0.1,0.2
 # Message TTL of 300 minutes (5 hours)
-Group.msgTtl = 1
-Group.nrofHosts = 10
+Group.msgTtl = 5
+Group.nrofHosts = 60
 Group.groupID = n
 Group.nodeLocation=0,0
 
@@ -74,7 +74,7 @@ Events1.interval = 25,35
 # Message sizes (500kB - 1MB)
 Events1.size = 500k,1M
 # range of message source/destination addresses
-Events1.hosts = 0,10
+Events1.hosts = 0,60
 # Message ID prefix
 Events1.prefix = M
 

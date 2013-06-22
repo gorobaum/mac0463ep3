@@ -7,8 +7,8 @@ Scenario.name = usp-Prophet
 Scenario.simulateConnections = true
 Scenario.updateInterval = 0.1
 # 43200s == 12h
-Scenario.endTime = 3.6k
-Scenario.nrofHostGroups = 1
+Scenario.endTime = 43200
+Scenario.nrofHostGroups = 2
 
 
 ## Interface-specific settings:
@@ -17,6 +17,12 @@ Scenario.nrofHostGroups = 1
 # For SimpleBroadcastInterface, the parameters are:
 # transmitSpeed : transmit speed of the interface (bytes per second)
 # transmitRange : range of the interface (meters)
+
+# "Bluetooth" interface for all nodes
+btInterface.type = SimpleBroadcastInterface
+# Transmit speed of 2 Mbps = 250kBps
+btInterface.transmitSpeed = 250k
+btInterface.transmitRange = 5
 
 # interface wifi
 wifiInterface.type = SimpleBroadcastInterface
@@ -50,14 +56,26 @@ Group.bufferSize = 5M
 Group.routeFile = ../simulacoes/wkts/usp.wkt
 # All nodes have the bluetooth interface
 Group.nrofInterfaces = 1
-Group.interface1 = wifiInterface
-# Walking speeds
-Group.speed = 30,50
+Group.interface1 = btInterface
+
+Group1.nrofInterfaces = 2
+Group1.interface1 = btInterface
+Group1.interface2 = wifiInterface
+# Car speeds
+Group1.speed = 30,50
 # Message TTL of 300 minutes (5 hours)
-Group.msgTtl = 2
-Group.nrofHosts = 100
-Group.groupID = n
-Group.nodeLocation=0,0
+Group1.msgTtl = 2
+Group1.nrofHosts = 200
+Group1.groupID = c
+Group1.nodeLocation=0,0
+
+# Walking speeds
+Group2.speed = 5,10
+# Message TTL of 300 minutes (5 hours)
+Group2.msgTtl = 2
+Group2.nrofHosts = 1000
+Group2.groupID = p
+Group2.nodeLocation=0,0
 
 MapBasedMovement.nrofMapFiles = 1
 MapBasedMovement.mapFile1 = ../simulacoes/wkts/usp.wkt
@@ -72,7 +90,7 @@ Events1.class = MessageEventGenerator
 Events1.interval = 30,60
 Events1.size = 10k,50k
 # range of message source/destination addresses
-Events1.hosts = 0,100
+Events1.hosts = 0,1199
 # Message ID prefix
 Events1.prefix = M
 
