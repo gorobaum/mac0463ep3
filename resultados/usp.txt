@@ -1,0 +1,31 @@
+Cenário USP
+	Representa a movimentação de 1000 pessoas e 200 carros por 24h dentro da cidade universitária.
+	Todas elas tem bluetooth ligado, com raio de transmissão de 5m e os carros tem wifi com raio de 80m.
+	Análise do rendimento dos protocolos:
+		DirectDelivery:
+			O pior rendimento foi do protocolo DirectDelivery, com apenas 3% das mensagens entregues.
+			Como o tamanho do cenário é gigante, e o número de nós também, a chance de um nó encontrar
+			outro que seja destinatário de algum de seus pacotes é muito pequena. A maioria das mensagens
+			são deletadas pelo ttl delas.
+		MaxProp:
+			O protocolo MaxProp obteve um resultado intermediário nesse cenário, com 37% das mensagens 
+			entregues.
+		Prophet:
+			O PROPHET teve o segundo melhor resultado, com 48.1% (465) dos pacotes entregues. Como o cenário
+			se aproxima bem de um cenário do dia-a-dia, o PROPHET se provou um dos melhores protocolos. 
+			Isso é resultado do tipo de escolha que ele toma para transmitir seus pacotes, ao escolher
+			passar pacotes para os nós com maior probabilidade de encontrar o destinatário e o decaimento
+			com o tempo dessas probabilidades, o que faz com que um nó que não passa pelo destinatário a tempo
+			não tenha tanta chance de ficar com o pacote. O PROPHER teria um desempenho bem melhor se o tipo
+			de movimentação escolhida para o cenário não fosse aleátoria.
+		SprayAndWait:
+			O SprayAndWait obteve o segundo pior rendimento, que foi de 13.2% de pacotes entreges. O número de 
+			transmissões é baixo pela natureza do protocolo. Como cada mensagem é transmitida para 6 nós. Era
+			esperado que ele tivesse um desempenho melhor que o DirectDelivery, dado que ele aumenta em 6 vezes
+			a chance de um pacote encontrar seu destinatário, que foi aproximadamente a melhora no número
+			de mensagens entregues.
+		Epidemic:
+			Esse foi o protocolo com o rendimento mediano. Foram entregues 2607 pacotes. Dada a natureza do
+			protocolo e o tamanho do cenário, esse resultado foi o esperado. Num espaço tão pequeno com tanta
+			movimentação e tanto tempo, é bem fácil ver que boa parte dos pacotes encontrariam seus
+			destinatários.
