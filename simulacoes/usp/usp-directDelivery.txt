@@ -65,7 +65,7 @@ Group1.interface2 = wifiInterface
 Group1.speed = 30,50
 # Message TTL of 300 minutes (5 hours)
 Group1.msgTtl = 2
-Group1.nrofHosts = 200
+Group1.nrofHosts = 50
 Group1.groupID = c
 Group1.nodeLocation=0,0
 
@@ -73,7 +73,7 @@ Group1.nodeLocation=0,0
 Group2.speed = 5,10
 # Message TTL of 300 minutes (5 hours)
 Group2.msgTtl = 2
-Group2.nrofHosts = 1000
+Group2.nrofHosts = 250
 Group2.groupID = p
 Group2.nodeLocation=0,0
 
@@ -90,7 +90,7 @@ Events1.class = MessageEventGenerator
 Events1.interval = 30,60
 Events1.size = 10k,50k
 # range of message source/destination addresses
-Events1.hosts = 0,1199
+Events1.hosts = 0,299
 # Message ID prefix
 Events1.prefix = M
 

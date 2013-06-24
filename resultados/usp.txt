@@ -1,31 +1,25 @@
 Cenário USP
-	Representa a movimentação de 1000 pessoas e 200 carros por 24h dentro da cidade universitária.
+	Representa a movimentação de 250 pessoas e 50 carros por 12h dentro da cidade universitária.
 	Todas elas tem bluetooth ligado, com raio de transmissão de 5m e os carros tem wifi com raio de 80m.
 	Análise do rendimento dos protocolos:
 		DirectDelivery:
-			O pior rendimento foi do protocolo DirectDelivery, com apenas 3% das mensagens entregues.
+			O pior rendimento foi do protocolo DirectDelivery, com apenas 2.9% das mensagens entregues.
 			Como o tamanho do cenário é gigante, e o número de nós também, a chance de um nó encontrar
-			outro que seja destinatário de algum de seus pacotes é muito pequena. A maioria das mensagens
-			são deletadas pelo ttl delas.
-		MaxProp:
-			O protocolo MaxProp obteve um resultado intermediário nesse cenário, com 37% das mensagens 
-			entregues.
+			outro que seja destinatário de algum de seus pacotes é muito pequena. 
+		MaxProp & Epidemic:
+			O protocolo MaxProp ficou empatado em primeiro lugar com o Epidemic com 19.3% dos pacotes
+			entregues. Ainda, eles tiveram o mesmo número de hops e latencia e valores muito próximos
+			de overhead e buffer time.
 		Prophet:
-			O PROPHET teve o segundo melhor resultado, com 48.1% (465) dos pacotes entregues. Como o cenário
-			se aproxima bem de um cenário do dia-a-dia, o PROPHET se provou um dos melhores protocolos. 
-			Isso é resultado do tipo de escolha que ele toma para transmitir seus pacotes, ao escolher
-			passar pacotes para os nós com maior probabilidade de encontrar o destinatário e o decaimento
-			com o tempo dessas probabilidades, o que faz com que um nó que não passa pelo destinatário a tempo
-			não tenha tanta chance de ficar com o pacote. O PROPHER teria um desempenho bem melhor se o tipo
-			de movimentação escolhida para o cenário não fosse aleátoria.
+			O PROPHET teve o segundo pior resultado, com 12.1% dos pacotes entregues. Em contraste com o 
+			cenário do Bloco A, cenário também baseado cotidiano, o PROPHET não foi tão bem. Nesse cenário
+			a movimentação aleátoria foi um fator decisivo no desempenho ruim do PROPHET. Como ele usa
+			probabilidades baseadas nos encontros passados dos nós para criar uma rotina para cada nó,
+			seu comportamento fica falho num ambiente onde os nós não seguem nenhuma rotina.
 		SprayAndWait:
-			O SprayAndWait obteve o segundo pior rendimento, que foi de 13.2% de pacotes entreges. O número de 
-			transmissões é baixo pela natureza do protocolo. Como cada mensagem é transmitida para 6 nós. Era
-			esperado que ele tivesse um desempenho melhor que o DirectDelivery, dado que ele aumenta em 6 vezes
-			a chance de um pacote encontrar seu destinatário, que foi aproximadamente a melhora no número
-			de mensagens entregues.
-		Epidemic:
-			Esse foi o protocolo com o rendimento mediano. Foram entregues 2607 pacotes. Dada a natureza do
-			protocolo e o tamanho do cenário, esse resultado foi o esperado. Num espaço tão pequeno com tanta
-			movimentação e tanto tempo, é bem fácil ver que boa parte dos pacotes encontrariam seus
-			destinatários.
+			O SprayAndWait obteve o segundo melhor rendimento, que foi de 14.1% de pacotes entreges. O número 
+			de transmissões é baixo pela natureza do protocolo, mas mesmo assim ele ficou acima do protocolo 
+			PROPHET, um protocolo que esperávamos que se sairia melhor. O SprayAndWait teve um bom desempenho
+			comparado com os outros porque ele faz 6 cópias de cada pacote criado na rede. Isso junto com um
+			ttl grande e o tempo elevado de simulação faz com que mais pacotes tenham chances de serem
+			entregues quando comparado com o PROPHET e o DirectDelivery.
