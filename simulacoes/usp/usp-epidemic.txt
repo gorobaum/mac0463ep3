@@ -3,7 +3,7 @@
 #
 
 ## Scenario settings
-Scenario.name = usp-Epidemic
+Scenario.name = usp-Epidemic1
 Scenario.simulateConnections = true
 Scenario.updateInterval = 0.1
 # 43200s == 12h

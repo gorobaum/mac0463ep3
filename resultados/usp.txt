@@ -9,7 +9,7 @@ Cenário USP
 		MaxProp & Epidemic:
 			O protocolo MaxProp ficou empatado em primeiro lugar com o Epidemic com 19.3% dos pacotes
 			entregues. Ainda, eles tiveram o mesmo número de hops e latencia e valores muito próximos
-			de overhead e buffer time.
+			de overhead e buffer time. 
 		Prophet:
 			O PROPHET teve o segundo pior resultado, com 12.1% dos pacotes entregues. Em contraste com o 
 			cenário do Bloco A, cenário também baseado cotidiano, o PROPHET não foi tão bem. Nesse cenário
