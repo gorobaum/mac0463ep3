@@ -13,21 +13,18 @@
 
 \author{\IEEEauthorblockN{Thiago de Gouveia Nunes}
 \IEEEauthorblockA{Instituto de Matemática e Estatística\\
-Universidade São Paulo\\
+Universidade de São Paulo\\
 São Paulo, São Paulo\\
 Email: thiago.gouveia.nunes@gmail.com}
 \and
-\IEEEauthorblockN{Homer Simpson}
-\IEEEauthorblockA{Twentieth Century Fox\\
-Springfield, USA\\
-Email: homer@thesimpsons.com}
-\and
-\IEEEauthorblockN{James Kirk\\ and Montgomery Scott}
-\IEEEauthorblockA{Starfleet Academy\\
-San Francisco, California 96678-2391\\
-Telephone: (800) 555--1212\\
-Fax: (888) 555--1212}}
+\IEEEauthorblockN{Samuel Plaça de Paula}
+\IEEEauthorblockA{Instituto de Matemática e Estatística\\
+Universidade de São Paulo\\
+São Paulo, São Paulo\\
+Email: samuelp@ime.usp.br}
+}
 
+\maketitle
 \IEEEpeerreviewmaketitle
 
 \section{Motivação}
@@ -35,8 +32,8 @@ Fax: (888) 555--1212}}
 \textit{The One}. 4 cenários foram criados, e 5 simulações foram rodadas sobre cada cenário, cada uma com
 um protocolo diferente. Com isso, podemos determinar quais protocolos tem vantagem sobre outros em situações
 semelhantes as dos cenários.
-  Esperamos que os protocolos que construam algum tipo de histórico sobre as interações entre os nós ( PROPHET e MaxProp ) tenham uma 
-vantagem sobre os protocolos que simplismente espalham os pacotes ( DirectDelivery, SprayAndWait e Epidemic ). 
+  Esperamos que os protocolos que construam algum tipo de histórico sobre as interações entre os nós (PROPHET e MaxProp) tenham uma 
+vantagem sobre os protocolos que simplesmente espalham os pacotes (DirectDelivery, SprayAndWait e Epidemic). 
 
 \section{Fundamentação}
   Todos os artigos lidos sobre os protocolos são os artigos em que os mesmos são definidos. Todos contêm, além da definição formal do
@@ -48,10 +45,10 @@ são triviais. Para verificar se a implementação deles condiz com o nosso pres
 Uma breve explicação dos cenários:
 
   O primeiro cenário é uma reprodução própria do Bloco A do Instituto de Matemática e Estatística da Universidade São Paulo. A simulação
-dura 24 horas com 60 pessoas trafegando de maneira aleátoria pelo edifício. Todos tem devices móveis com interface bluetooth com raio de
+dura 24 horas com 60 pessoas trafegando de maneira aleatória pelo edifício. Todos tem dispositivos móveis com interface bluetooth com raio de
 transmissão de 5 metros.
 
-  O segundo cenário é a cidade universitária com 50 carros e 250 pessoas, com movimentação aleátoria. O tempo de simulação é de 12 horas.
+  O segundo cenário é a cidade universitária com 50 carros e 250 pessoas, com movimentação aleatória. O tempo de simulação é de 12 horas.
 Não foi possível criar um cenário maior, pois o protocolo MaxProp requer muita memória. Todos usam bluetooth com raio 5m e os carros tem wifi
 com 80 metros de raio de transmissão.
 
@@ -69,36 +66,36 @@ com 80 metros de raio de transmissão.
     \item O pior rendimento foi do protocolo DirectDelivery, o que já era esperado. Como ele só entrega 
       o pacote para seu destinatário, o número de entregas (1406 contra 2473 do segundo menor) foi 
 			extremamente pequeno.
-			A chance do pacote ser entregue foi de 48%. Dado o algoritmo do protocolo, essa procentagem é 
-			maior que o esperado. Mas isso é resultado da alta frequência de criação de mensagens, do tamamnho 
+			A chance do pacote ser entregue foi de 48\%. Dado o algoritmo do protocolo, essa porcentagem é 
+			maior que o esperado. Mas isso é resultado da alta frequência de criação de mensagens, do tamanho 
 			do buffer (5MB) e o tamanho médio das mensagens (750kb). Dado isso, o buffer fica cheio dentro de 
 			3 minutos e meio. A partir dai uma mensagem só é criada quando uma mensagem sai do buffer. Agora, 
 			dado isso, o tamanho pequeno do cenário e o tempo alto de simulação, a chance de um nó finalmente 
 			encontrar o destinatário de alguma mensagem em seu buffer é alta.
 		\item O protocolo MaxProp teve o melhor resultado desse cenário, com 2908 mensagens entregues de 2913
 			(eficiência de 99.8\%). Mas ele teve o maior número de transmissões, 571 mil, contra 280 mil do mais
-			próximo dele. Dado isso, podemos classificá-lo como o protocolo que mais exige dos devices móveis.
+			próximo dele. Dado isso, podemos classificá-lo como o protocolo que mais exige dos dispositivos móveis.
 			O número elevado de transmissões se dá pelo fato do cenário ser pequeno, e o método do algoritmo 
 			de escolher para quem um pacote deve ser passado. O algoritmo cria um vetor com as probabilidades
 			de um nó encontrar outro nó. 
 			
 			Com esses valores, um caminho com a maior probabilidade é criado para
-			orientar um pacote que vai trafegar na rede. Dado isso, um pacote chega mais rápidamente a seu
+			orientar um pacote que vai trafegar na rede. Dado isso, um pacote chega mais rapidamente a seu
 			destinatário. Quando uma mensagem chega ao destinatário, todos os nós que ainda tem aquela mensagem
 			em seus buffers são orientados a deletá-la, o que libera mais espaço para a circulação de mais 
-			mensagens. Isso é comprovado pelo pequeno tempo de permanencia de uma mensagem no buffer, algo
-			entorno de 31 seg. As mensagens ficam muito tempo "dentro" dos nós intermédiarios do caminho,
+			mensagens. Isso é comprovado pelo pequeno tempo de permanência de uma mensagem no buffer, algo
+			em torno de 31 seg. As mensagens ficam muito tempo "dentro" dos nós intermediários do caminho,
 			como podemos ver pelo overhead ratio de 182.5 desse protocolo.
 		\item O PROPHET teve o segundo melhor resultado, com 95.3\% (2778) dos pacotes entregues. Comparado
 			com o MaxProp, podemos afirmar que rendimento é melhor. Com menos da metade de transmissões
-			ele deixou de entregar 129 pacotes. A latência entre as entregas foi 10s maior que o MaxProp.
-			Tanto a latência como o tempo em buffer podem ser explicados pelas decisões de transmissão
+			ele deixou de entregar 129 pacotes. A latência entre as entregas foi 10s maior que no MaxProp.
+			Tanto a latência quanto o tempo em buffer podem ser explicados pelas decisões de transmissão
 			de pacotes do PROPHET. Ele só transmite um pacote quando ele encontra outro nó com uma
 			probabilidade maior que a sua de entregar o pacote para seu destinatário.
-		\item O SprayAndWait obteve o segundo pior rendimento, que foi de 84.7\% de pacotes entreges. O número de 
+		\item O SprayAndWait obteve o segundo pior rendimento, que foi de 84.7\% de pacotes entregues. O número de 
 			transmissões é baixo pela natureza do protocolo. Como cada mensagem é transmitida para 6 nós, e
 			esses nós só passam a mensagem para seu destinatário, o número será realmente baixo. O tempo
-			no buffer das mensagems é alto pelo mesmo motivo. 
+			no buffer das mensagens é alto pelo mesmo motivo. 
 		\item O Epidemic foi o protocolo com o rendimento mediano. Foram entregues 2607 pacotes. Dada a natureza do
 			protocolo e o tamanho do cenário, esse resultado foi o esperado. Num espaço tão pequeno com tanta
 			movimentação e tanto tempo, é bem fácil ver que boa parte dos pacotes encontrariam seus
@@ -110,21 +107,21 @@ com 80 metros de raio de transmissão.
 \subsection{USP}
   	Análise do rendimento dos protocolos:
   	\begin{itemize}
-  	  \item O pior rendimento foi do protocolo DirectDelivery, com apenas 2.9% das mensagens entregues.
+  	  \item O pior rendimento foi do protocolo DirectDelivery, com apenas 2.9\% das mensagens entregues.
 			Como o tamanho do cenário é gigante, e o número de nós também, a chance de um nó encontrar
 			outro que seja destinatário de algum de seus pacotes é muito pequena. 
-			\item O PROPHET teve o segundo pior resultado, com 12.1% dos pacotes entregues. Em contraste com o 
+			\item O PROPHET teve o segundo pior resultado, com 12.1\% dos pacotes entregues. Em contraste com o 
 			cenário do Bloco A, cenário também baseado cotidiano, o PROPHET não foi tão bem. Nesse cenário
 			a movimentação aleátoria foi um fator decisivo no desempenho ruim do PROPHET. Como ele usa
 			probabilidades baseadas nos encontros passados dos nós para criar uma rotina para cada nó,
 			seu comportamento fica falho num ambiente onde os nós não seguem nenhuma rotina.
-			\item O SprayAndWait obteve o segundo melhor rendimento, que foi de 14.1% de pacotes entreges. O número 
+			\item O SprayAndWait obteve o segundo melhor rendimento, que foi de 14.1\% de pacotes entreges. O número 
 			de transmissões é baixo pela natureza do protocolo, mas mesmo assim ele ficou acima do protocolo 
 			PROPHET, um protocolo que esperávamos que se sairia melhor. O SprayAndWait teve um bom desempenho
 			comparado com os outros porque ele faz 6 cópias de cada pacote criado na rede. Isso junto com um
 			ttl grande e o tempo elevado de simulação faz com que mais pacotes tenham chances de serem
 			entregues quando comparado com o PROPHET e o DirectDelivery.
-			\item O protocolo MaxProp ficou empatado em primeiro lugar com o Epidemic com 19.3% dos pacotes
+			\item O protocolo MaxProp ficou empatado em primeiro lugar com o Epidemic com 19.3\% dos pacotes
 			entregues. Ainda, eles tiveram o mesmo número de hops e latencia e valores muito próximos
 			de overhead e buffer time. 
   	\end{itemize}
