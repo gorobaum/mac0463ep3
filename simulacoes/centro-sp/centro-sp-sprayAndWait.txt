@@ -3,7 +3,7 @@
 #
 
 ## Scenario settings
-Scenario.name = usp-SprayAndWait
+Scenario.name = centro-sp-SprayAndWait
 Scenario.simulateConnections = true
 Scenario.updateInterval = 0.1
 # 43200s == 12h
@@ -53,7 +53,7 @@ wifiInterface.transmitRange = 80
 Group.movementModel = MapBasedMovement
 Group.router = SprayAndWaitRouter
 Group.bufferSize = 5M
-Group.routeFile = ../simulacoes/wkts/usp.wkt
+Group.routeFile = ../simulacoes/wkts/centro-sp.wkt
 # All nodes have the bluetooth interface
 Group.nrofInterfaces = 1
 Group.interface1 = btInterface
@@ -78,7 +78,7 @@ Group2.groupID = p
 Group2.nodeLocation=0,0
 
 MapBasedMovement.nrofMapFiles = 1
-MapBasedMovement.mapFile1 = ../simulacoes/wkts/usp.wkt
+MapBasedMovement.mapFile1 = ../simulacoes/wkts/centro-sp.wkt
 
 ## Message creation parameters
 # How many event generators
