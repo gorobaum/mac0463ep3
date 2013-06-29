@@ -3,7 +3,7 @@
 #
 
 ## Scenario settings
-Scenario.name = centro-sp-DirectDelivery
+Scenario.name = usp-SprayAndWait
 Scenario.simulateConnections = true
 Scenario.updateInterval = 0.1
 # 43200s == 12h
@@ -51,9 +51,9 @@ wifiInterface.transmitRange = 80
 
 # Common settings for all groups
 Group.movementModel = MapBasedMovement
-Group.router = DirectDeliveryRouter
+Group.router = SprayAndWaitRouter
 Group.bufferSize = 5M
-Group.routeFile = ../simulacoes/wkts/centro-sp.wkt
+Group.routeFile = ../simulacoes/wkts/usp.wkt
 # All nodes have the bluetooth interface
 Group.nrofInterfaces = 1
 Group.interface1 = btInterface
@@ -62,7 +62,7 @@ Group1.nrofInterfaces = 2
 Group1.interface1 = btInterface
 Group1.interface2 = wifiInterface
 # Car speeds
-Group1.speed = 15,50
+Group1.speed = 30,50
 # Message TTL of 300 minutes (5 hours)
 Group1.msgTtl = 2
 Group1.nrofHosts = 75
@@ -78,7 +78,7 @@ Group2.groupID = p
 Group2.nodeLocation=0,0
 
 MapBasedMovement.nrofMapFiles = 1
-MapBasedMovement.mapFile1 = ../simulacoes/wkts/centro-sp.wkt
+MapBasedMovement.mapFile1 = ../simulacoes/wkts/usp.wkt
 
 ## Message creation parameters
 # How many event generators
@@ -90,7 +90,7 @@ Events1.class = MessageEventGenerator
 Events1.interval = 30,60
 Events1.size = 10k,50k
 # range of message source/destination addresses
-Events1.hosts = 0,299
+Events1.hosts = 0,599
 # Message ID prefix
 Events1.prefix = M
 
